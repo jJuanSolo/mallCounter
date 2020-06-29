@@ -7,12 +7,12 @@ export default StyleSheet.create({
         height,
         width,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     text: {
         textAlign: 'center',
         alignSelf: "center",
-        fontSize: 24,
+        fontSize: 34,
         margin: 10
     },
     buttonContainer:{

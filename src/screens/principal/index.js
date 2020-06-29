@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { Icon, Tile } from 'react-native-elements';
 import styles from './styles';
-import { startCounter, updateCounter, restartCounter } from './actionCreator'; 
+import { startCounter, updateCounter} from './actionCreator'; 
 const fondo = require('../../../assets/fondo.jpeg');
 
 class Principal extends PureComponent{ 
@@ -19,18 +19,18 @@ class Principal extends PureComponent{
         const { update } = this.props;
         update(counter - 1);
     };
+    doRestart=()=>{
+        const { update } = this.props;
+        update(0);
+    }
     render() {
-        const { restart, count } = this.props;
+        const { count } = this.props;
         console.log("ESTE ES UN REDUCER", count);
         return(
             <View style={styles.container}>
-                <Text style={styles.text}>Esta es la cantidad
-                de personas dentro del centro comercial: </Text>
-                <Tile
-                imageSrc={fondo}
-                title={count}
-                featured
-                />
+                <Text style={styles.text}>¿ Cuantas personas hay en el centro comercial ? </Text>
+                <Text style={styles.text}> {count} </Text> 
+              
                 <View style={styles.buttonContainer} >
                     <Icon 
                     name='account-minus'
@@ -45,10 +45,10 @@ class Principal extends PureComponent{
                     />
                 </View>
                 <Icon 
-                     name='fas fa-sync' 
-                     type='fontawesome'
+                     name='database-refresh' 
+                     type='material-community'
                      size={50}
-                     onPress={() => restart()}
+                     onPress={() => this.doRestart()}
                     />
             </View>
         );
@@ -63,7 +63,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     start: startCounter,
-    restart: restartCounter,
     update: updateCounter
 }
 export default connect( mapStateToProps, mapDispatchToProps )(Principal);
