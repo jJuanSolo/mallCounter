@@ -6,10 +6,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
-        case Actions.INCREMENT:
+        case Actions.UPDATECOUNTER:
             return { ...state, counter: action.payload};
-        case Actions.DECREMENT:
-            return {...state, counter: action.payload};
+        case Actions.ERRORCOUNTER:
+            return { ...state, counter: action.payload};
+        case Actions.RESTARTCOUNTER:
+            return { ...state, counter: 0};
         default:
             return state;
     }

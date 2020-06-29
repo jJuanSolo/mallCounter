@@ -1,4 +1,6 @@
 export default {
-    INCREMENT: 'Increment',
-    DECREMENT: 'Decrement'
+    UPDATECOUNTER : 'UpdateCounter',
+    ERRORCOUNTER : 'ErrorCounter',
+    RESTARTCOUNTER : 'RestartCounter',
+    STARTCOUNTER : 'StartCounter'
 };
