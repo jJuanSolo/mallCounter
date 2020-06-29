@@ -25,15 +25,15 @@ export const restartCounter = () => ({
   });
 
 export const startCounter = () => async (dispatch) =>{
-  const userCollection = dbh.collection("malls").doc("qNGiV8F6qEN4ug1wpzJ3");
-  await userCollection.get()
-   .then((snapShot) => {
-       console.log(snapShot.data(),"SNAPSHOT");
-      return dispatch({
-       type: Actions.UPDATECOUNTER,
-       payload: snapShot.data()
-      });
-    }).catch((error) => {
+  const mallCounter = dbh.collection("malls").doc("qNGiV8F6qEN4ug1wpzJ3");
+  await mallCounter.onSnapshot((snapshot) => {
+    const fieldList = snapshot.data();
+    dispatch({
+        type: Actions.UPDATECOUNTER,
+        payload: snapShot.data()
+    });
+  })
+   .catch((error) => {
       return dispatch({
       type: Actions.ERRORCOUNTER,
       payload: error

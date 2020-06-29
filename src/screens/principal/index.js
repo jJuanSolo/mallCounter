@@ -7,9 +7,9 @@ import { startCounter, updateCounter, restartCounter } from './actionCreator';
 const fondo = require('../../../assets/fondo.jpeg');
 
 class Principal extends PureComponent{ 
-    componentDidMount(){
+    async componentDidMount(){
         const { start } = this.props;
-        start();
+        await start();
     }
     increment = (counter) => {
         const { update } = this.props;
@@ -45,8 +45,8 @@ class Principal extends PureComponent{
                     />
                 </View>
                 <Icon 
-                     name='account-plus' 
-                     type='material-community'
+                     name='fas fa-sync' 
+                     type='fontawesome'
                      size={50}
                      onPress={() => restart()}
                     />
