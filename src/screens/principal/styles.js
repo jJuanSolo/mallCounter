@@ -10,7 +10,17 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
+        textAlign: 'center',
         alignSelf: "center",
-        fontSize: 24
+        fontSize: 24,
+        margin: 10
+    },
+    buttonContainer:{
+        flexDirection: 'row',
+        height: height*0.3,
+        width,
+        alignItems: 'center',
+        justifyContent: 'space-around',
     }
+
 });
