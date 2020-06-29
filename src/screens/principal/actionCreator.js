@@ -20,14 +20,15 @@ export const updateCounter = (counter) => async (dispatch) => {
   });
 }
 
-export const restarCounter = () => ({
+export const restartCounter = () => ({
     type: Actions.RESTARTCOUNTER,
   });
 
-export const startCounter = () => (dispatch) =>{
+export const startCounter = () => async (dispatch) =>{
   const userCollection = dbh.collection("malls").doc("qNGiV8F6qEN4ug1wpzJ3");
   await userCollection.get()
    .then((snapShot) => {
+       console.log(snapShot.data(),"SNAPSHOT");
       return dispatch({
        type: Actions.UPDATECOUNTER,
        payload: snapShot.data()
