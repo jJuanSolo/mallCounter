@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
-import { Icon, Tile } from 'react-native-elements';
+import { View, Text, ImageBackground } from 'react-native';
+import { Icon } from 'react-native-elements';
 import styles from './styles';
-import { startCounter, updateCounter,restartCounter} from './actionCreator'; 
-
+import { startCounter, updateCounter, restartCounter} from './actionCreator'; 
+const back = require('../../../assets/background.png');
 
 class Principal extends PureComponent{ 
     async componentDidMount(){
@@ -28,17 +28,18 @@ class Principal extends PureComponent{
         const { count } = this.props;
         console.log("ESTE ES UN REDUCER", count);
         return(
-            <View style={styles.container}>
-                <Text style={styles.text} >¿ Cuantas personas hay en el centro comercial ? </Text>
-                <Text style={styles.text}> {count} </Text> 
-                <View>
+            <ImageBackground source={back} style={styles.container}>
+                <Text style={styles.text}>0{count} </Text> 
+                <View style={styles.buttonsContainer}>
                 <View style={styles.buttonContainer} >
                     <Icon 
+                    color='white'
                     name='account-minus'
                     type='material-community'
                     size={50}
                     onPress={() => this.decrement() } />
                     <Icon 
+                     color='white'
                      name='account-plus' 
                      type='material-community'
                      size={50}
@@ -46,13 +47,14 @@ class Principal extends PureComponent{
                     />
                 </View>
                 <Icon 
+                     color='white'
                      name='database-refresh' 
                      type='material-community'
                      size={50}
                      onPress={() => this.doRestart()}
                     />
                 </View>
-            </View>
+            </ImageBackground>
         );
     }
 }

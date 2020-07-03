@@ -8,23 +8,29 @@ export default StyleSheet.create({
         height,
         width,
         alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'Latin Modern Roman 10',
+        justifyContent: 'flex-end',
         fontStyle: 'italic'
     },
     text: {
+        marginLeft: 40,
         textAlign: 'center',
         alignSelf: "center",
-        fontSize: 34,
-        margin: 10,
-        fontStyle: 'italic'
+        fontSize: 100,
+        marginBottom: 200,
+        fontStyle: 'italic',
+        color: 'white',
     },
     buttonContainer:{
         flexDirection: 'row',
-        height: height*0.3,
+        height: height*0.2,
         width,
         alignItems: 'center',
         justifyContent: 'space-around',
+    }, 
+    buttonsContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        marginBottom: height  * 0.05
     }
 
 });
