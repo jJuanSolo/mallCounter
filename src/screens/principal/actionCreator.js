@@ -1,15 +1,47 @@
-import firebase from '../../../firebase';
+import firebase from '../../../src/firebase';
 import Actions from '../../redux/actionType';
 
-export const updateCounter = (counter) => async (dispatch) => {
+export const updateCounter = (operator) => async (dispatch) => {
     const dbh = firebase.firestore();
-    const mallCollection = dbh.collection('malls');
-    const selectedMall = mallCollection.doc("qNGiV8F6qEN4ug1wpzJ3");
-    await selectedMall.update({counter})
-     .then(() => {
+    const mallCollection = dbh.collection('counters');
+    const selectedMall = mallCollection.doc("alkosto-03-07-2020");
+    await selectedMall.get()
+    .then(doc => {
+
+      let door1 = doc.data().door1;  
+      if (operator=='increment'){
+        door1 = door1 + 1;        
+      } else {
+        door1 =door1 - 1;
+      } 
+    selectedMall.update({door1})
+      .then(() => {
         return dispatch({
-       type: Actions.UPDATECOUNTER,
-       payload: counter
+        type: Actions.ERRORCOUNTER,
+        payload: 'sucess'
+      });
+      })
+      .catch((error) => {
+        return dispatch({
+        type: Actions.ERRORCOUNTER,
+        payload: error
+      });
+    });
+      
+    });
+}
+
+
+
+export const restartCounter = () => async (dispatch) => {
+  const dbh = firebase.firestore();
+  const mallCollection = dbh.collection('counters');
+  const selectedMall = mallCollection.doc("alkosto-03-07-2020");
+  await selectedMall.update({door1:0,door2:0})
+     .then(() => {
+       return dispatch({
+       type: Actions.ERRORCOUNTER,
+       payload: 'success'
     });
     })
     .catch((error) => {
@@ -18,14 +50,17 @@ export const updateCounter = (counter) => async (dispatch) => {
       payload: error
     });
   });
+    
+  
 }
-
 
 export const startCounter = () => async (dispatch) =>{
     const dbh = firebase.firestore();
-    const mallCounter = dbh.collection("malls").doc("qNGiV8F6qEN4ug1wpzJ3");
+    const mallCounter = dbh.collection("counters").doc("alkosto-03-07-2020");
     await mallCounter.onSnapshot((snapshot) => {
-    const counter = snapshot.data().counter;
+    const door1Counter = snapshot.data().door1;
+    const door2Counter = snapshot.data().door2;
+    const counter = door1Counter + door2Counter;
     dispatch({
         type: Actions.UPDATECOUNTER,
         payload: counter

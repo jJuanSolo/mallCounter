@@ -1,5 +1,6 @@
 export default {
     UPDATECOUNTER : 'UpdateCounter',
     ERRORCOUNTER : 'ErrorCounter',
-    STARTCOUNTER : 'StartCounter'
+    STARTCOUNTER : 'StartCounter',
+    UPDATEDOOR : 'UpdateDoor'
 };

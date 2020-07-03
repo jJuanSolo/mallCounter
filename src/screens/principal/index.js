@@ -3,45 +3,46 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { Icon, Tile } from 'react-native-elements';
 import styles from './styles';
-import { startCounter, updateCounter} from './actionCreator'; 
-const fondo = require('../../../assets/fondo.jpeg');
+import { startCounter, updateCounter,restartCounter} from './actionCreator'; 
+
 
 class Principal extends PureComponent{ 
     async componentDidMount(){
         const { start } = this.props;
         await start();
     }
-    increment = (counter) => {
+    increment = () => {
         const { update } = this.props;
-        update(counter + 1);
+        update('increment');
     };
-    decrement = (counter) => {
+    decrement = () => {
         const { update } = this.props;
-        update(counter - 1);
+        update('');
     };
     doRestart=()=>{
-        const { update } = this.props;
-        update(0);
+        const {restart} = this.props;
+        restart();
     }
+    
     render() {
         const { count } = this.props;
         console.log("ESTE ES UN REDUCER", count);
         return(
             <View style={styles.container}>
-                <Text style={styles.text}>¿ Cuantas personas hay en el centro comercial ? </Text>
+                <Text style={styles.text} >¿ Cuantas personas hay en el centro comercial ? </Text>
                 <Text style={styles.text}> {count} </Text> 
-              
+                <View>
                 <View style={styles.buttonContainer} >
                     <Icon 
                     name='account-minus'
                     type='material-community'
                     size={50}
-                    onPress={() => this.decrement(count) } />
+                    onPress={() => this.decrement() } />
                     <Icon 
                      name='account-plus' 
                      type='material-community'
                      size={50}
-                     onPress={() => this.increment(count)}
+                     onPress={() => this.increment()}
                     />
                 </View>
                 <Icon 
@@ -50,6 +51,7 @@ class Principal extends PureComponent{
                      size={50}
                      onPress={() => this.doRestart()}
                     />
+                </View>
             </View>
         );
     }
@@ -63,6 +65,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
     start: startCounter,
-    update: updateCounter
+    update: updateCounter,
+    restart: restartCounter
 }
 export default connect( mapStateToProps, mapDispatchToProps )(Principal);
