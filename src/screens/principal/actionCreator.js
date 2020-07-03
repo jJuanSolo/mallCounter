@@ -60,7 +60,8 @@ export const startCounter = () => async (dispatch) =>{
     await mallCounter.onSnapshot((snapshot) => {
     const door1Counter = snapshot.data().door1;
     const door2Counter = snapshot.data().door2;
-    const counter = door1Counter + door2Counter;
+    const door3Counter = snapshot.data().door3;
+    const counter = door1Counter + door2Counter + door3Counter;
     dispatch({
         type: Actions.UPDATECOUNTER,
         payload: counter
