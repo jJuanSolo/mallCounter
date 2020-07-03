@@ -12,7 +12,6 @@ export default StyleSheet.create({
         fontStyle: 'italic'
     },
     text: {
-        marginLeft: 40,
         textAlign: 'center',
         alignSelf: "center",
         fontSize: 100,
