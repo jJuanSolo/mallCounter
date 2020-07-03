@@ -29,7 +29,7 @@ class Principal extends PureComponent{
         console.log("ESTE ES UN REDUCER", count);
         return(
             <ImageBackground source={back} style={styles.container}>
-                <Text style={styles.text}>0{count} </Text> 
+                <Text style={styles.text}>{count}</Text> 
                 <View style={styles.buttonsContainer}>
                 <View style={styles.buttonContainer} >
                     <Icon 
