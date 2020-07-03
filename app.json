@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mallCounter",
-    "slug": "mallCounter",
+    "name": "CuyMeter",
+    "slug": "CuyMeter",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/cuy.png",

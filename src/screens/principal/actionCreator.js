@@ -37,7 +37,7 @@ export const restartCounter = () => async (dispatch) => {
   const dbh = firebase.firestore();
   const mallCollection = dbh.collection('counters');
   const selectedMall = mallCollection.doc("alkosto-03-07-2020");
-  await selectedMall.update({door1:0,door2:0})
+  await selectedMall.update({door1:0,door2:0,doo3:0})
      .then(() => {
        return dispatch({
        type: Actions.ERRORCOUNTER,
