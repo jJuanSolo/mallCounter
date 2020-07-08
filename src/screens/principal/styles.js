@@ -30,6 +30,16 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginBottom: height  * 0.05
+    },
+    textOverlay : {
+        textAlign: 'center',
+        alignSelf: "center",
+        fontSize: 30,
+        fontStyle: 'italic',
+    },
+    overlayContainer: {
+        height: height * 0.25,
+        width,      
     }
 
 });

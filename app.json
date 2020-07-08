@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/cuy.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/cuy.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

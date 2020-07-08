@@ -33,11 +33,14 @@ export const updateCounter = (operator) => async (dispatch) => {
 
 
 
-export const restartCounter = () => async (dispatch) => {
+export const restartCounter = (count) => async (dispatch) => {
   const dbh = firebase.firestore();
   const mallCollection = dbh.collection('counters');
   const selectedMall = mallCollection.doc("alkosto-03-07-2020");
-  await selectedMall.update({door1:0,door2:0,doo3:0})
+  const date = Date.now();
+  const saveCount = { date, count }
+  selectedMall.collection('records').add(saveCount);
+  await selectedMall.update({ door1:0, door2:0, door3:0, door4:0 })
      .then(() => {
        return dispatch({
        type: Actions.ERRORCOUNTER,
@@ -61,7 +64,8 @@ export const startCounter = () => async (dispatch) =>{
     const door1Counter = snapshot.data().door1;
     const door2Counter = snapshot.data().door2;
     const door3Counter = snapshot.data().door3;
-    const counter = door1Counter + door2Counter + door3Counter;
+    const door4Counter = snapshot.data().door4;
+    const counter = door1Counter + door2Counter + door3Counter + door4Counter;
     dispatch({
         type: Actions.UPDATECOUNTER,
         payload: counter

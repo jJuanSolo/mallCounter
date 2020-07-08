@@ -1,12 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, ImageBackground } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Icon, Overlay } from 'react-native-elements';
 import styles from './styles';
 import { startCounter, updateCounter, restartCounter} from './actionCreator'; 
 const back = require('../../../assets/background.png');
 
 class Principal extends PureComponent{ 
+
+    state = {
+        visible: false
+    }
+
     async componentDidMount(){
         const { start } = this.props;
         await start();
@@ -19,14 +24,18 @@ class Principal extends PureComponent{
         const { update } = this.props;
         update('');
     };
-    doRestart=()=>{
-        const {restart} = this.props;
-        restart();
+    doRestart = () => {
+        const { restart, count } = this.props;
+        restart(count);
+        this.setState({ visible: false });
     }
-    
+    isVisible = () => {
+        const { visible } = this.state;
+        return visible ? true : false ;
+    }
+
     render() {
         const { count } = this.props;
-        console.log("ESTE ES UN REDUCER", count);
         return(
             <ImageBackground source={back} style={styles.container}>
                 <Text style={styles.text}>{count}</Text> 
@@ -51,9 +60,34 @@ class Principal extends PureComponent{
                      name='database-refresh' 
                      type='material-community'
                      size={50}
-                     onPress={() => this.doRestart()}
+                     onPress={() => this.setState({ visible: true })}
                     />
                 </View>
+                <Overlay
+                isVisible={this.isVisible()}
+                >
+                <View style={styles.overlayContainer}>
+                <Text style={styles.textOverlay}>
+                        ¿Está seguro que desea reiniciar?
+                </Text>
+                <View style={styles.buttonContainer}>
+                  <Icon 
+                    color='red'
+                    name='close-circle-outline'
+                    type='material-community'
+                    size={50}
+                    onPress={() => this.setState({ visible: false }) } 
+                    />
+                  <Icon 
+                     color='green'
+                     name='check-circle' 
+                     type='material-community'
+                     size={50}
+                     onPress={() => this.doRestart()}
+                    />
+                 </View>
+                 </View>
+                </Overlay>
             </ImageBackground>
         );
     }
